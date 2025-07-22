@@ -1,0 +1,11 @@
+{
+	"id": "static-press",
+	"name": "StaticPress",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Allows pushing/pulling documents to/from a local directory outside of your working vault. Useful for static-site content management and more.",
+	"author": "Steven A.J.",
+	"authorUrl": "https://github.com/steven-aj",
+	"fundingUrl": "https://buymeacoffee.com/steven.aj",
+	"isDesktopOnly": true
+}
