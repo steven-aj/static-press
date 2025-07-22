@@ -1,18 +1,19 @@
 # StaticPress
 
-> [!IMPORTANT]
-> This plugin is in on-going development.
+> [!NOTE]
+> StaticPress is derived from [Alex Fazio](https://github.com/afazio1)'s original work on [Obsidian Markdown Blogger](https://github.com/afazio1/obsidian-markdown-blogger) and has been heavily modified for a more feature-rich experience. 
+> If you prefer simple, command-based tooling - please check out and support her work.
 
-**StaticPress** is an [Obsidian](https://obsidian.md) plugin built for users who enjoy managing static-site content from within a vault. It handles pushing and pulling markdown files between your vault and a target directory of your choice — no fluff, no lock-in, no online service required.
+**StaticPress** is an [Obsidian](https://obsidian.md) plugin built for users who enjoy managing static-site content from within a vault. It handles pushing and pulling markdown files between your vault and a target directory of choice - no fluff, no lock-in, no online service required.
 
 - Define push paths per folder. 
 - Sync raw markdown back and forth. 
-- No versioning, no git magic — just direct overwrite for now.
+- No versioning, no git magic - just direct overwrite for now.
 
 Built for devs, writers, and tinkerers who want their notes to *be* their site content without fighting their tools.
 
 > [!CAUTION]
-> **StaticPress is not a version control system**. Files are completely overwritten when pushed or pulled.
+> In it's current state, **StaticPress is not a version control system**. Files are completely overwritten when pushed or pulled.
 
 ## Features
 - **Configure Routing** between your vault and your local project
