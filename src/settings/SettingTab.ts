@@ -11,13 +11,13 @@ export default class SettingTab extends PluginSettingTab {
 		this.plugin = plugin;
 	}
 
-	private addTabHeading() {
+	private createTabHeading() {
 		const { containerEl } = this;
 		containerEl.empty();
 		containerEl.createEl("h2", { text: "StaticPress Settings" });
 	}
 
-	private addFolderPathInput() { // TODO: deprecate this
+	private createFolderPathInput() { // TODO: deprecate this
 		new Setting(this.containerEl)
 			.setName("Original Directory Setting")
 			.setDesc("The local directory to push and pull files to and from. Must be an absolute path.")
@@ -45,15 +45,13 @@ export default class SettingTab extends PluginSettingTab {
 	}
 
 	display(): void {
-		this.addTabHeading();
-		// this.addFilePicker();
-		
+		this.createTabHeading();
 		// this.containerEl.createEl("h3", { text: "Command Palette Tools" });
 		this.addAutomaticSlugToggle();
 		
 		this.containerEl.createEl("h3", { text: "Vault Routes" });
 		
-		this.addFolderPathInput(); // TODO: deprecate this
+		this.createFolderPathInput(); // TODO: deprecate this
 		
 		Vault.recurseChildren(app.vault.getRoot(), (item) => {
 			if (item instanceof TFolder) {
