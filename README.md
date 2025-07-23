@@ -6,46 +6,54 @@
 
 **StaticPress** is an [Obsidian](https://obsidian.md) plugin built for users who enjoy managing static-site content from within a vault. It handles pushing and pulling markdown files between your vault and a target directory of choice - no fluff, no lock-in, no online service required.
 
-- Define push paths per folder. 
+- Define destination paths for each vault folder. 
 - Sync raw markdown back and forth. 
 - No versioning, no git magic - just direct overwrite for now.
 
 Built for devs, writers, and tinkerers who want their notes to *be* their site content without fighting their tools.
 
 > [!CAUTION]
-> In it's current state, **StaticPress is not a version control system**. Files are completely overwritten when pushed or pulled.
+> **StaticPress is _not_ currently a version control system**. 
+> Files are completely overwritten when pushed or pulled.
 
-## Features
-- **Configure Routing** between your vault and your local project
-- **Push** a vault document to a local project folder (Obsidian -> Project)
-- **Pull** content from a local project file to your vault (Obsidian <- Project)
+## ✨ Features
+### Vault-to-Project Routing
 
-## Usage
+Push documents to specified paths on a folder-by-folder basis.
+
+### Seamlessly Migrate Content
+
+**Push** your markdown to a local project folder  when you're ready to publish. (Obsidian :arrow_right: Project)
+
+**Pull** changes made outside of the vault into your workspace. (Obsidian :arrow_left: Project)
+
+## :gear: Usage
+
 After enabling the plugin, go to StaticPress' settings.
-- Set routing paths for the contents of your vault. **Paths must be absolute**.
+- Define routing paths for the contents of your vault. **Paths must be absolute**.
 - Toggle your preferred settings
 - Use StaticPress' *Push* and *Pull* buttons to move your content between directories
 
-### Command Palette
+### :video_game: Command Palette
 
 #### Push Command
-Creates or overwrites a file at location `/PROJECT_PATH/<note_name>.md` with the current note's markdown content.
+Creates or overwrites a file at location `/PROJECT_PATH/<note_name>.md` with the current working document.
 - Open a markdown note in editing mode
-- Open the command palette and search "push"
+- Open the command palette and search `push`
 - If the **Local project folder path** is invalid or does not exist, the note will not be pushed
 
 #### Pull Command 
-Overwrites the current note's markdown content with the file content at location `/PROJECT_PATH/<note_name>.md`
+Overwrites the working document's content with the file content at location `/PROJECT_PATH/<note_name>.md`
 - Open a markdown note in editing mode
-- Open the command palette and search "pull"
+- Open the command palette and search `pull`
 - If the file at location `/PROJECT_PATH/<note_name>.md` is invalid or does not exist, the content will not be pulled
 
 #### Validate Path
 Validates the **Local project folder path** currently in settings.
-- Open the command palette and search "Validate Path command"
+- Open the command palette and search `validate`
 - A message indicating the validity of the path will be displayed 
 
-## Support Development
+## :heart: Support Development
 
 If this project is useful to you, consider supporting it!
 
