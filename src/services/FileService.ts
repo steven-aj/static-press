@@ -1,7 +1,8 @@
-import { App, Editor, MarkdownView, Notice } from "obsidian";
-import { ModalMessage, Settings } from "../shared/interfaces";
+import { App, Editor, MarkdownView, Notice, TFolder, Vault } from "obsidian";
+import { ModalMessage, RouteSetting, Settings } from "../shared/interfaces";
 import ConfirmModal from "src/modals/ConfirmModal";
 import ErrorModal from "../modals/AlertModal";
+import urlSlug from 'url-slug';
 import * as path from "path";
 import * as fs from "fs";
 
@@ -27,14 +28,13 @@ export default class FileService {
      * 
      * If it doesn't exist, alerts the user. Otherwise, toasts validation. 
      */
-    public async validatePath(): Promise<void> {
-        if (!fs.existsSync(this.settings.projectFolder)) {
+    public validPath(path: string): boolean {
+        if (!fs.existsSync(path)) {
             this.errorModal.display(INVALID_PATH);
-            // new ErrorModal(this.app).open();
-            return;
+            return false;
         }
 
-        new Notice(`Valid path: ${this.settings.projectFolder}`);
+        return true;
     }
 
     /** 
@@ -53,16 +53,25 @@ export default class FileService {
      * @param view - Instance of the MarkdownView
      */
     public pushFile(editor: Editor, view: MarkdownView): void {
-        const { projectFolder } = this.settings;
+        const { routes } = this.settings;
 
-        if (!view) return;
+        if (!routes || !view || !view.file.parent) return;
 
-        if (!fs.existsSync(projectFolder)) {
+        const { parent } = view.file;
+
+        if (!fs.existsSync(routes[parent.path].destination)) {
             this.errorModal.display(INVALID_PATH);
             return;
         }
 
-        const targetPath = path.resolve(projectFolder, view.file.name);
+        var title: string = view.file.name;
+
+        if (routes[parent.path].automaticSlug) {
+            console.log(view.file.basename)
+            title = urlSlug(view.file.basename) + ".md";
+        }
+
+        const targetPath = path.resolve(routes[parent.path].destination, title);
         const content = view.editor.getDoc().getValue();
 
         try {
@@ -104,5 +113,35 @@ export default class FileService {
                 new Notice(err.message);
             }
         }
+    }
+
+    /**
+     * ## Get Vault Folders
+     * 
+     * Reads folders from the working vault and returns a corresponding object.
+     * 
+     * @returns {Record<string, string>} An object with keys of folders and properties of their destinations
+     */
+    public getVaultFolders(): Record<string, RouteSetting> {
+        let folders: Record<string, RouteSetting> = {};
+
+        Vault.recurseChildren(app.vault.getRoot(), (item) => {
+            if (item instanceof TFolder) {
+                if (item.isRoot()) {
+                    folders["/"] = {
+                        destination: "",
+                        automaticSlug: false
+                    }
+                }
+                else {
+                    folders[item.name] = {
+                        destination: "",
+                        automaticSlug: false
+                    }
+                }
+            }
+        });
+
+        return folders;
     }
 }

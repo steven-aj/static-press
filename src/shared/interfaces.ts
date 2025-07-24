@@ -1,18 +1,18 @@
 /**
+ * 
+ */
+export interface RouteSetting {
+	destination: string;
+	automaticSlug: boolean;
+}
+
+/**
  * User-defined settings for StaticPress
  */
 export interface Settings {
 	projectFolder: string;
-	vaultRoutes: PathRegistry[];
+	routes: Record<string, RouteSetting>|null;
 	automaticSlugs: boolean;
-}
-
-/**
- * 
- */
-export interface PathRegistry {
-	vaultPath: string;
-	destinationPath: string;
 }
 
 /**

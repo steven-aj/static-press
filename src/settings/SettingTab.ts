@@ -1,14 +1,17 @@
 import { App, PluginSettingTab, Setting, Vault, TFolder } from "obsidian";
 import StaticPress from "src/main";
+import FileService from "src/services/FileService";
 // import { VPAction } from "src/shared/enums";
 
 export default class SettingTab extends PluginSettingTab {
 
 	plugin: StaticPress;
+	fileService: FileService;
 
-	constructor(app: App, plugin: StaticPress) {
-		super(app, plugin);
+	constructor(plugin: StaticPress) {
+		super(plugin.app, plugin);
 		this.plugin = plugin;
+		this.fileService = plugin.fileService;
 	}
 
 	private createTabHeading() {
@@ -17,57 +20,47 @@ export default class SettingTab extends PluginSettingTab {
 		containerEl.createEl("h2", { text: "StaticPress Settings" });
 	}
 
-	private createFolderPathInput() { // TODO: deprecate this
-		new Setting(this.containerEl)
-			.setName("Original Directory Setting")
-			.setDesc("The local directory to push and pull files to and from. Must be an absolute path.")
-			.addText(text => text
-				.setPlaceholder("/home/user/blog/posts")
-				.setValue(this.plugin.settings.projectFolder)
-				.onChange(async (value) => {
-					this.plugin.settings.projectFolder = value;
-					await this.plugin.saveSettings();
-				})
-			);
-	}
+	private async createRouteInputs() {
+		if (this.plugin.settings.routes === null) {
+			this.plugin.settings.routes = this.fileService.getVaultFolders();
+			console.log(this.plugin.settings.routes);
+			await this.plugin.saveSettings();
+		}
 
-	private addAutomaticSlugToggle() {
-		new Setting(this.containerEl)
-			.setName("Automatic Slugs")
-			.setDesc("Renames pushed files to a slug-friendly format (ex: 'StaticPress Rocks' -> 'staticpress-rocks').")
-			.addToggle(cb => cb
-				.setValue(this.plugin.settings.automaticSlugs)
-				.onChange(async (value) => {
-					this.plugin.settings.automaticSlugs = value;
-					await this.plugin.saveSettings();
-				})
-			);
+		const { routes } = this.plugin.settings;
+
+		for (let key in routes) {
+			const name = `${(key === "/" ? "Vault Root" : key)}`
+
+			this.containerEl.createEl("h3", { text: name });
+
+			new Setting(this.containerEl)
+				.setName("Destination")
+				.setTooltip(`Destination for markdown inside ${key}`)
+				.setDesc(`Must be an absolute path.`)
+				.addText(text => text
+					.setPlaceholder("/path/to/your/project")
+					.setValue(routes[key].destination)
+					.onChange(async (value) => {
+						routes[key].destination = value;
+						await this.plugin.saveSettings();
+					})
+				);
+
+			new Setting(this.containerEl)
+				.setName("Automatic Slug")
+				.addToggle(cb => cb
+					.setValue(routes[key].automaticSlug)
+					.onChange(async (value) => {
+						routes[key].automaticSlug = value;
+						await this.plugin.saveSettings();
+					})
+				);
+		}
 	}
 
 	display(): void {
 		this.createTabHeading();
-		// this.containerEl.createEl("h3", { text: "Command Palette Tools" });
-		this.addAutomaticSlugToggle();
-		
-		this.containerEl.createEl("h3", { text: "Vault Routes" });
-		
-		this.createFolderPathInput(); // TODO: deprecate this
-		
-		Vault.recurseChildren(app.vault.getRoot(), (item) => {
-			if (item instanceof TFolder) {
-				new Setting(this.containerEl)
-					.setName(item.name ? item.name : "Vault Root")
-					.setDesc("Must be an absolute path.")
-					.addText(text => text
-						.setPlaceholder("/home/user/blog/posts")
-						.setValue(this.plugin.settings.projectFolder)
-						.onChange(async (value) => {
-							// TODO: save the vault/target pair
-							// this.plugin.settings.pipelines = value;
-							// await this.plugin.saveSettings();
-						})
-					);
-			}
-		});
+		this.createRouteInputs();
 	}
 }

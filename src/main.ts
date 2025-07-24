@@ -6,7 +6,7 @@ import SettingTab from "./settings/SettingTab";
 
 export const DEFAULT_SETTINGS: Settings = {
 	projectFolder: "",
-	vaultRoutes: [],
+	routes: null,
 	automaticSlugs: false
 }
 
@@ -37,13 +37,6 @@ export default class StaticPress extends Plugin {
 	private initCommands() {
 
 		if (Platform.isMobile) return;
-
-		// "Validate path" command
-		this.addCommand({
-			id: "validate-path",
-			name: "Validate path",
-			editorCallback: this.fileService.validatePath.bind(this)
-		});
 
 		// "Push markdown" command
 		this.addCommand({
@@ -99,7 +92,7 @@ export default class StaticPress extends Plugin {
 	 * 
 	 */
 	private initSettingTab() {
-		const settingTab = new SettingTab(this.app, this);
+		const settingTab = new SettingTab(this);
 		this.addSettingTab(settingTab);
 	}
 
@@ -127,12 +120,14 @@ export default class StaticPress extends Plugin {
 	 * 
 	 */
 	async onload() {
-		// Load & initialize settings
+		// 1. Load plugin settings
 		await this.loadSettings();
+		
+		// 2. Intialize services & settings tab
+		this.initServices();
 		this.initSettingTab();
 
-		// Initialize plugin features
-		this.initServices();
+		// 3. Initialize plugin features
 		this.initEventRegistry();
 		this.initCommands();
 		this.initRibbonItems();
