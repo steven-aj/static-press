@@ -94,26 +94,26 @@ export default class FileService {
      * @param editor - CodeMirror's Editor
      * @param view - Instance of the MarkdownView
      */
-    public pullFile(checking: boolean, editor: Editor, view: MarkdownView): void {
-        const projectBlogPath = path.resolve(this.settings.projectFolder, view.file.name);
+    // public pullFile(checking: boolean, editor: Editor, view: MarkdownView): void {
+    //     const projectBlogPath = path.resolve(this.settings.projectFolder, view.file.name);
 
-        if (!fs.existsSync(projectBlogPath)) {
-            this.errorModal.display(INVALID_PATH);
-            return;
-        }
+    //     if (!fs.existsSync(projectBlogPath)) {
+    //         this.errorModal.display(INVALID_PATH);
+    //         return;
+    //     }
 
-        if (!checking) {
-            try {
-                const file = fs.readFileSync(projectBlogPath, "utf8");
+    //     if (!checking) {
+    //         try {
+    //             const file = fs.readFileSync(projectBlogPath, "utf8");
 
-                editor.getDoc().setValue(file);
+    //             editor.getDoc().setValue(file);
 
-                new Notice(`"${view.file.name}" has been pulled from '${projectBlogPath}'`);
-            } catch (err) {
-                new Notice(err.message);
-            }
-        }
-    }
+    //             new Notice(`"${view.file.name}" has been pulled from '${projectBlogPath}'`);
+    //         } catch (err) {
+    //             new Notice(err.message);
+    //         }
+    //     }
+    // }
 
     /**
      * ## Get Vault Folders

@@ -46,11 +46,11 @@ export default class StaticPress extends Plugin {
 		});
 
 		// Pull markdown command
-		this.addCommand({
-			id: "pull-md",
-			name: "Pull markdown",
-			editorCheckCallback: this.fileService.pullFile.bind(this)
-		});
+		// this.addCommand({
+		// 	id: "pull-md",
+		// 	name: "Pull markdown",
+		// 	editorCheckCallback: this.fileService.pullFile.bind(this)
+		// });
 	}
 
 	/** ### Initialize Ribbon Items
@@ -71,11 +71,11 @@ export default class StaticPress extends Plugin {
 		);
 
 		// "Pull" ribbon item
-		this.addRibbonIcon(
-			'arrow-down-from-line',
-			'Pull markdown',
-			() => this.fileService.pullFile(false, view.editor, view)
-		);
+		// this.addRibbonIcon(
+		// 	'arrow-down-from-line',
+		// 	'Pull markdown',
+		// 	() => this.fileService.pullFile(false, view.editor, view)
+		// );
 	}
 
 	private initEventRegistry() {
