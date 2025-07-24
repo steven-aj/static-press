@@ -3,13 +3,14 @@ name: Release Obsidian plugin
 on:
   push:
     tags:
-      - "*"
+      - "static site"
+      - "static content"
 
 jobs:
   build:
-    permissions: write-all
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
 
