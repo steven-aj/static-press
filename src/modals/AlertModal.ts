@@ -1,5 +1,5 @@
 import { App, Modal } from "obsidian";
-import { SPModalMessage } from "src/shared/interfaces";
+import { ModalMessage } from "src/shared/interfaces";
 
 
 export default class AlertModal extends Modal {
@@ -13,7 +13,7 @@ export default class AlertModal extends Modal {
         this.body = "This is a generic placeholder for the error modal.";
     }
 
-    public display(errorMessage: SPModalMessage) {
+    public display(errorMessage: ModalMessage) {
         this.title = errorMessage.title;
         this.body = errorMessage.body;
         this.open();
