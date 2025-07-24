@@ -13,7 +13,7 @@ Built for devs, writers, and tinkerers who want their notes to *be* their site c
 
 > [!CAUTION]
 > **StaticPress is _not_ currently a version control system**. 
-> Files are completely overwritten when pushed or pulled.
+> Files are completely overwritten when pushed
 
 ## ✨ Features
 ### Vault-to-Project Routing
@@ -26,7 +26,7 @@ Specify destination paths for each folder within your Vault
 
 ### Automatic Slugs
 
-Toggle **automatic slug** generation on a folder-by-folder basis. (ex.: 'Why StaticPress Rocks' -> 'why-static-press-rocks') 
+Toggle **automatic slug** generation on a folder-by-folder basis. (ex.: 'Why StaticPress Rocks' -> 'why-staticpress-rocks') 
 
 ## :gear: Usage
 
@@ -42,11 +42,6 @@ Creates or overwrites a file at location `/PROJECT_PATH/<note_name>.md` with the
 - Open a markdown note in editing mode
 - Open the command palette and search `push`
 - If the **local project folder path** is invalid or does not exist, the note will not be pushed
-
-#### Validate Path
-Validates the **local project folder path** currently in settings.
-- Open the command palette and search `validate`
-- A message indicating the validity of the path will be displayed 
 
 ## :heart: Support Development
 
