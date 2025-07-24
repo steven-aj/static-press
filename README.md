@@ -4,10 +4,9 @@
 > StaticPress is derived from [Alex Fazio](https://github.com/afazio1)'s original work on [Obsidian Markdown Blogger](https://github.com/afazio1/obsidian-markdown-blogger) and has been heavily modified for a more feature-rich experience. 
 > If you prefer a more simple, command-based tooling - please check out and support her work.
 
-**StaticPress** is an [Obsidian](https://obsidian.md) plugin built for users who enjoy managing static-site content from within a vault. It handles pushing and pulling markdown files between your vault and a target directory of choice - no fluff, no lock-in, no online service required.
+**StaticPress** is an [Obsidian](https://obsidian.md) plugin built for users who enjoy managing static-site content from within a vault. It handles pushing markdown files from your vault to a target directory of choice - no fluff, no lock-in, no online service required.
 
-- Define destination paths for each vault folder. 
-- Sync raw markdown back and forth. 
+- Define destination paths for each vault folder.
 - No versioning, no git magic - just direct overwrite for now.
 
 Built for devs, writers, and tinkerers who want their notes to *be* their site content without fighting their tools.
@@ -19,20 +18,22 @@ Built for devs, writers, and tinkerers who want their notes to *be* their site c
 ## ✨ Features
 ### Vault-to-Project Routing
 
-Push documents to specified paths on a folder-by-folder basis.
+Specify destination paths for each folder within your Vault
 
 ### Seamlessly Migrate Content
 
-**Push** your markdown to a local project folder  when you're ready to publish. (Obsidian :arrow_right: Project)
+**Push** your markdown with a single click when you're ready to publish.
 
-**Pull** changes made outside of the vault into your workspace. (Obsidian :arrow_left: Project)
+### Automatic Slugs
+
+Toggle **automatic slug** generation on a folder-by-folder basis. (ex.: 'Why StaticPress Rocks' -> 'why-static-press-rocks') 
 
 ## :gear: Usage
 
 After enabling the plugin, go to StaticPress' settings.
 - Define routing paths for the contents of your vault. **Paths must be absolute**.
 - Toggle your preferred settings
-- Use StaticPress' *Push* and *Pull* buttons to move your content between directories
+- Use StaticPress' convenient _push_ button to move your content to its new home
 
 ### :video_game: Command Palette
 
@@ -40,16 +41,10 @@ After enabling the plugin, go to StaticPress' settings.
 Creates or overwrites a file at location `/PROJECT_PATH/<note_name>.md` with the current working document.
 - Open a markdown note in editing mode
 - Open the command palette and search `push`
-- If the **Local project folder path** is invalid or does not exist, the note will not be pushed
-
-#### Pull Command 
-Overwrites the working document's content with the file content at location `/PROJECT_PATH/<note_name>.md`
-- Open a markdown note in editing mode
-- Open the command palette and search `pull`
-- If the file at location `/PROJECT_PATH/<note_name>.md` is invalid or does not exist, the content will not be pulled
+- If the **local project folder path** is invalid or does not exist, the note will not be pushed
 
 #### Validate Path
-Validates the **Local project folder path** currently in settings.
+Validates the **local project folder path** currently in settings.
 - Open the command palette and search `validate`
 - A message indicating the validity of the path will be displayed 
 
