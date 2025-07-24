@@ -2,7 +2,7 @@
 
 > [!NOTE]
 > StaticPress is derived from [Alex Fazio](https://github.com/afazio1)'s original work on [Obsidian Markdown Blogger](https://github.com/afazio1/obsidian-markdown-blogger) and has been heavily modified for a more feature-rich experience. 
-> If you prefer simple, command-based tooling - please check out and support her work.
+> If you prefer a more simple, command-based tooling - please check out and support her work.
 
 **StaticPress** is an [Obsidian](https://obsidian.md) plugin built for users who enjoy managing static-site content from within a vault. It handles pushing and pulling markdown files between your vault and a target directory of choice - no fluff, no lock-in, no online service required.
 
@@ -57,4 +57,6 @@ Validates the **Local project folder path** currently in settings.
 
 If this project is useful to you, consider supporting it!
 
-<a href="https://www.buymeacoffee.com/steven.aj" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/steven.aj" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a> 
+
+[:heart: Become a GitHub Sponsor](https://github.com/sponsors/steven-aj)
