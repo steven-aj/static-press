@@ -1,7 +1,7 @@
 {
 	"name": "static-press",
-	"version": "0.3.0",
-	"description": "Transfer content to and from another directory with a single click. Useful for managing content on static sites.",
+	"version": "1.0.0",
+	"description": "Transfer content to another directory with a single click. Useful for managing content on static sites.",
 	"main": "src/main.js",
 	"scripts": {
 		"develop": "node esbuild.config.mjs",
