@@ -21,10 +21,8 @@ export default class AlertModal extends Modal {
 
     onOpen() {
         const {contentEl} = this;
-        contentEl.innerHTML = `
-            <h2>${this.title}</h2> 
-            <p>${this.body}</p>
-        `;
+        contentEl.createEl("h2", { text: this.title });
+        contentEl.createEl("p", { text: this.body });
     }
 
     onClose() {

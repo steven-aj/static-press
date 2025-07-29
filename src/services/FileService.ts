@@ -1,4 +1,4 @@
-import { App, Editor, MarkdownView, Notice, TFolder, Vault } from "obsidian";
+import { App, Editor, MarkdownView, Notice, TFolder, Vault, View } from "obsidian";
 import { ModalMessage, RouteSetting, Settings } from "../shared/interfaces";
 import ConfirmModal from "src/modals/ConfirmModal";
 import ErrorModal from "../modals/AlertModal";
@@ -67,7 +67,6 @@ export default class FileService {
         var title: string = view.file.name;
 
         if (routes[parent.path].automaticSlug) {
-            console.log(view.file.basename)
             title = urlSlug(view.file.basename) + ".md";
         }
 
