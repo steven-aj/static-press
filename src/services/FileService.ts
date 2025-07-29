@@ -64,7 +64,7 @@ export default class FileService {
             return;
         }
 
-        var title: string = view.file.name;
+        let title: string = view.file.name;
 
         if (routes[parent.path].automaticSlug) {
             title = urlSlug(view.file.basename) + ".md";
