@@ -1,12 +1,12 @@
 import { MarkdownView, Plugin, Platform } from "obsidian";
-import { Settings } from "./shared/interfaces";
+import { ISettings } from "./shared/interfaces";
 import FileService from "./services/FileService";
 import EventService from "./services/EventService";
-import SettingTab from "./settings/SettingTab";
+import SettingTab from "./views/SettingTab";
 
-export const DEFAULT_SETTINGS: Settings = {
+export const DEFAULT_SETTINGS: ISettings = {
 	projectFolder: "",
-	routes: null,
+	routes: {},
 	automaticSlugs: false
 }
 
@@ -15,7 +15,7 @@ export const DEFAULT_SETTINGS: Settings = {
  */
 export default class StaticPress extends Plugin {
 
-	settings: Settings;
+	settings: ISettings;
 	fileService: FileService;
 	eventService: EventService;
 

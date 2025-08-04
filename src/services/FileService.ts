@@ -1,5 +1,5 @@
 import { App, Editor, MarkdownView, Notice, TFolder, Vault, View } from "obsidian";
-import { ModalMessage, RouteSetting, Settings } from "../shared/interfaces";
+import { FolderSetting, ModalMessage, ISettings } from "../shared/interfaces";
 import ConfirmModal from "src/modals/ConfirmModal";
 import ErrorModal from "../modals/AlertModal";
 import urlSlug from 'url-slug';
@@ -16,7 +16,7 @@ export default class FileService {
     confirmModal: ConfirmModal;
     errorModal: ErrorModal;
 
-    constructor(private app: App, private settings: Settings) {
+    constructor(private app: App, private settings: ISettings) {
         this.confirmModal = new ConfirmModal(app);
         this.errorModal = new ErrorModal(app);
     }
@@ -114,33 +114,39 @@ export default class FileService {
     //     }
     // }
 
+    private createSetting(path: string): FolderSetting {
+        return {
+            source: path,
+            destination: "",
+            automaticSlug: false
+        }
+    }
+
     /**
      * ## Get Vault Folders
      * 
-     * Reads folders from the working vault and returns a corresponding object.
+     * Reads folders from the working vault and returns an array of their paths.
      * 
-     * @returns {Record<string, string>} An object with keys of folders and properties of their destinations
+     * @returns {FolderSetting[]} An object with keys of folders and properties of their destinations
      */
-    public getVaultFolders(): Record<string, RouteSetting> {
-        let folders: Record<string, RouteSetting> = {};
+    public getVaultFolders(): string[] {
+        let folders: string[] = [];
 
         Vault.recurseChildren(app.vault.getRoot(), (item) => {
             if (item instanceof TFolder) {
-                if (item.isRoot()) {
-                    folders["/"] = {
-                        destination: "",
-                        automaticSlug: false
-                    }
+                if (!item.isRoot) {
+                    Vault.recurseChildren(item, (subItem) => {
+                        if (subItem instanceof TFolder) {
+                            folders.push(subItem.path);
+                        }
+                    });
+                    folders.push(item.path);
                 }
-                else {
-                    folders[item.name] = {
-                        destination: "",
-                        automaticSlug: false
-                    }
-                }
+                else folders.push(item.path);
             }
+
         });
 
-        return folders;
+        return folders.sort();
     }
 }

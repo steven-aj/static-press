@@ -3,8 +3,8 @@ name: Release Obsidian plugin
 on:
   push:
     tags:
-      - "static site"
-      - "static content"
+      - "static site" # Remove after plugin approval.
+      - "static content" # Remove after plugin approval.
 
 jobs:
   build:

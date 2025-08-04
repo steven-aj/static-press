@@ -1,7 +1,8 @@
 /**
  * 
  */
-export interface RouteSetting {
+export interface FolderSetting {
+	source: string;
 	destination: string;
 	automaticSlug: boolean;
 }
@@ -9,9 +10,9 @@ export interface RouteSetting {
 /**
  * User-defined settings for StaticPress
  */
-export interface Settings {
+export interface ISettings {
 	projectFolder: string;
-	routes: Record<string, RouteSetting>|null;
+	routes: Record<string, FolderSetting>;
 	automaticSlugs: boolean;
 }
 
