@@ -1,7 +1,6 @@
 import { MarkdownView, Plugin, Platform } from "obsidian";
 import { ISettings } from "./shared/interfaces";
 import FileService from "./services/FileService";
-import EventService from "./services/EventService";
 import SettingTab from "./views/SettingTab";
 
 export const DEFAULT_SETTINGS: ISettings = {
@@ -17,7 +16,6 @@ export default class StaticPress extends Plugin {
 
 	settings: ISettings;
 	fileService: FileService;
-	eventService: EventService;
 
 	/** ### Initialize Services
 	 * 
@@ -26,7 +24,6 @@ export default class StaticPress extends Plugin {
 	 */
 	private initServices() {
 		this.fileService = new FileService(this.app, this.settings);
-		this.eventService = new EventService(this.settings);
 	}
 
 	/**### Initialize Commands
@@ -78,14 +75,6 @@ export default class StaticPress extends Plugin {
 		// );
 	}
 
-	private initEventRegistry() {
-		// "On File Renamed"
-		this.registerEvent(
-			this.app.vault.on('rename', this.eventService.onFileRenamed)
-		);
-
-	}
-
 	/** ### Initialize Setting Tab
 	 * 
 	 * Add a settings tab for in-app configurations
@@ -128,7 +117,6 @@ export default class StaticPress extends Plugin {
 		this.initSettingTab();
 
 		// 3. Initialize plugin features
-		this.initEventRegistry();
 		this.initCommands();
 		this.initRibbonItems();
 	}
